@@ -1,0 +1,18 @@
+{
+  "name": "bahu_shop",
+  "version": "0.0.0",
+  "authors": [
+    "Maximilian Bachhuber <bahuma20@bahuma-online.de>"
+  ],
+  "description": "A webshop based on modern technologies",
+  "license": "MIT",
+  "homepage": "https://bahuma.me/solutions/shop",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

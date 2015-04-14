@@ -1,0 +1,11 @@
+{
+  "name": "bahu_shop",
+  "version": "0.0.0",
+  "description": "This is a webshop based on modern technologies.",
+  "main": "server.js",
+  "repository": "https://github.com/bahuma/shop",
+  "author": "Mostafa Eweda <mo.eweda@gmail.com>",
+  "dependencies": {
+    "express": "~3.2.4"
+  }
+}
