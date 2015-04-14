@@ -5,6 +5,6 @@ var stateSchema = new Schema({
     name: String,
 });
 
-var State = mongoose.model(stateSchema, 'State');
+var State = mongoose.model('State', stateSchema);
 
 module.exports = State;

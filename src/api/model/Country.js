@@ -6,6 +6,6 @@ var countrySchema = new Schema({
     code: String
 });
 
-var Country = mongoose.model(countrySchema, 'State');
+var Country = mongoose.model('State', countrySchema);
 
 module.exports = Country;

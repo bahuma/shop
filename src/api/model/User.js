@@ -7,6 +7,6 @@ var userSchema = new Schema({
     customer: { type: Schema.Types.ObjectId, ref: 'Customer' }
 });
 
-var User = mongoose.model(userSchema, 'User');
+var User = mongoose.model('User', userSchema);
 
 module.exports = User;

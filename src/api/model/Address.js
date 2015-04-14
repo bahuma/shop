@@ -10,6 +10,6 @@ var addressSchema = new Schema({
     country: {type: Schema.Types.ObjectId, ref: 'Country'}
 });
 
-var Address = mongoose.model(addressSchema, 'Address');
+var Address = mongoose.model('Address', addressSchema);
 
 module.exports = Address;

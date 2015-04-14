@@ -16,6 +16,6 @@ var orderSchema = new Schema({
     shippingAddress: { type: Schema.Types.ObjectId, ref: 'Address' }
 });
 
-var Order = mongoose.model(orderSchema, 'Order');
+var Order = mongoose.model('Order', orderSchema);
 
 module.exports = Order;

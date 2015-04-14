@@ -1,10 +1,13 @@
+var api = require('./api.js');
 var express = require('express');
 
 var router = express.Router();
 
-router.route('/test')
-    .get(function(req, res){
-        res.send('test called');
-    });
+router.route('/customer')
+    .get(api.getCustomers);
+    
+router.route('/state')
+    .get(api.getStates)
+    .post(api.addState);
     
 module.exports = router;
