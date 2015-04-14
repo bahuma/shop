@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var customerSchema = new Schema({
-    name: String,
-    surname: String,
-    address: [{ type: Schema.Types.ObjectId, ref: 'Address' }],
-    birthday: Date
+    name: {type: String, required: true},
+    surname: {type: String, required: true},
+    address: [{ type: Schema.Types.ObjectId, ref: 'Address', required: true }],
+    birthday: {type: Date, required: true}
 });
 
 var Customer = mongoose.model('Customer', customerSchema);

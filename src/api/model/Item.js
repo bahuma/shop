@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var itemSchema = new Schema({
-    name: String,
-    description: String,
-    price: Schema.Types.Double,
-    category: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
-    image: [String]
+    name: {type: String, required: true},
+    description: {type: String, required: false},
+    price: {type: Schema.Types.Double, required: true},
+    category: [{ type: Schema.Types.ObjectId, ref: 'Category', required: true }],
+    image: [{type: String, required: false}]
 });
 
 var Item = mongoose.model('Item', itemSchema);

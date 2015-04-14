@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var stateSchema = new Schema({
-    name: String,
+    name: {type: String, required: true}
 });
 
 var State = mongoose.model('State', stateSchema);
