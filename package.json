@@ -6,6 +6,8 @@
   "repository": "https://github.com/bahuma/shop",
   "author": "Mostafa Eweda <mo.eweda@gmail.com>",
   "dependencies": {
-    "express": "~3.2.4"
+    "express": "^4.12.3",
+    "mongoose": "^4.0.1",
+    "mongoose-double": "0.0.1"
   }
 }

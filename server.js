@@ -1,9 +1,14 @@
 var express = require('express');
 var app = express();
+var apiRouter = require('./src/api/apiRouter.js');
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+
+app.use(express.static('src/frontend'));
+
+app.use('/admin', express.static('src/backend'));
+
+app.use('/api', apiRouter);
+
 
 var server = app.listen(process.env.PORT, function () {
 
