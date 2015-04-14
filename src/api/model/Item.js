@@ -5,7 +5,7 @@ var itemSchema = new Schema({
     name: String,
     description: String,
     price: Schema.Types.Double,
-    _category: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
+    category: [{ type: Schema.Types.ObjectId, ref: 'Category' }],
     image: [String]
 });
 
