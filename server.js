@@ -7,6 +7,8 @@ app.use(express.static('src/frontend'));
 
 app.use('/admin', express.static('src/backend'));
 
+app.use('/bower-components', express.static('bower_components'));
+
 app.use('/api', apiRouter);
 
 
