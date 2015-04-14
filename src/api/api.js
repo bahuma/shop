@@ -42,7 +42,7 @@ api.getStates = function(req, res) {
 
 api.addState = function(req, res) {
     var state = new DBState({
-        name: "Test-State"
+        name: req.body.name
     });
     
     state.save(function(err, state){
