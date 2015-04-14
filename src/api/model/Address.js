@@ -6,7 +6,7 @@ var addressSchema = new Schema({
     number: {type: String, required: true},
     zip: {type: String, required: true},
     city: {type: String, required: true},
-    state: {type: Schema.Types.ObjectId, ref: 'State'},
+    state: {type: Schema.Types.ObjectId, ref: 'State', required: false},
     country: {type: Schema.Types.ObjectId, ref: 'Country', required: true}
 });
 
