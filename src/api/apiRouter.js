@@ -1,28 +1,32 @@
-var api = require('./api.js');
 var express = require('express');
 var passport = require('passport');
+
+var utilities = require('./utilities.js');
+
+var customerController = require('./controller/customer.js');
+var stateController = require('./controller/state.js');
+var userController = require('./controller/user.js');
 
 // Setup router
 var router = express.Router();
 
 router.route('/customer')
-    .get(api.getCustomers);
+    .get(customerController.getCustomers);
     
 router.route('/state')
-    .get(api.getStates)
-    .post(api.addState);
+    .get(stateController.getStates)
+    .post(stateController.addState);
     
 router.route('/user')
-    .get(api.getUsers)
-    .post(api.addUser);
+    .get(userController.getUsers)
+    .post(userController.registerUser);
     
 router.route('/user/me')
-    .get(function(req, res){
-        return res.send(req.user);
-    })
-router.route('/login')
+    .get(userController.getMe);
+    
+router.route('/user/login')
     .post(passport.authenticate('local'), function(req, res) {
-        return res.send('signed in');
+        return utilities.sendSuccess(res, 'User signed in successfull', req.user);
     });
     
 module.exports = router;
