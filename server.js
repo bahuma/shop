@@ -28,7 +28,7 @@ app.use(cookieParser());
 
 // Session
 app.use(require('express-session')({
-    secret: 'keyboard cat',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }));

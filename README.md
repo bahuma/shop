@@ -1,4 +1,4 @@
-# BahuShop 
+# Bahuma Shop 
 
 This is a webshop based on modern technologies such like [AngularJS](https://angularjs.org), [MongoDB](https://www.mongodb.org), [NodeJS](https://nodejs.org) and [Express](http://expressjs.com).
 
@@ -8,8 +8,9 @@ This is a webshop based on modern technologies such like [AngularJS](https://ang
 1. Download the source code and place it in a directory on your web server
 2. Run **`npm install`** to download the node components
 3. Run **`bower install`** to download the neccesary libraries
-4. Set your database credentials in the environment
-
+4. Set environment variables
+   - DATABASE: mongodb://user:password@host:port/name
+   - SESSION_SECRET: (A random string)
 
 ## Running the application
 
