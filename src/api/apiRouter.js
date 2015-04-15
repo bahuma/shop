@@ -14,4 +14,8 @@ router.route('/state')
     .get(api.getStates)
     .post(api.addState);
     
+router.route('/user')
+    .get(api.getUsers)
+    .post(api.addUser);
+    
 module.exports = router;
