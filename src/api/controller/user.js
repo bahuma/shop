@@ -32,6 +32,10 @@ userController.registerUser = function(req, res) {
 };
 
 userController.getMe = function(req, res) {
+    if (req.user === undefined) {
+        return res.status(404).send('Not logged in');
+    }
+    
     return res.send(req.user);
 }
 
