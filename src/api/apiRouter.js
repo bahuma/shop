@@ -29,4 +29,10 @@ router.route('/user/login')
         return utilities.sendSuccess(res, 'User signed in successfull', req.user);
     });
     
+router.route('/user/logout')
+    .get(function(req, res) {
+        req.logout();
+        return utilities.sendSuccess(res, "User signed out successfull");
+    });
+    
 module.exports = router;
