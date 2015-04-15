@@ -1,3 +1,5 @@
+var passport = require('passport');
+
 var DBCustomer = require('./model/Customer.js');
 var DBState = require('./model/State.js');
 var DBUser = require('./model/User.js');
@@ -67,18 +69,19 @@ api.getUsers = function(req, res) {
 };
 
 api.addUser = function(req, res) {
-    var user = new DBUser({
-        name: req.body.name,
-        password: req.body.password,
+    DBUser.register(new DBUser({
+        username: req.body.username,
         email: req.body.email
-    });
-    
-    user.save(function(err, createdUser){
+    }), req.body.password, function(err, createdUser){
         if(err) {
             return res.send(err);
         }
         
-        sendSuccess(res, "User created", createdUser);
+        sendSuccess(res, 'User registered', createdUser);
+        // passport.authenticate('local')(req, res, function () {
+        //     sendSuccess(res, 'User created and signed in', createdUser);
+        // });
+
     });
 };
 
