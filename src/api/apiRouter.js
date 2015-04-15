@@ -15,7 +15,7 @@ router.route('/customer')
     
 router.route('/state')
     .get(stateController.getStates)
-    .post(stateController.addState);
+    .post(utilities.isAdmin, stateController.addState);
     
 router.route('/user')
     .get(userController.getUsers)
