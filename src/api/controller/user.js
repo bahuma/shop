@@ -10,6 +10,12 @@ userController.getUsers = function(req, res) {
             return res.send(err);
         }
         
+        for (var index = 0; index < users.length; ++index) {
+            users[index] = users[index].toObject();
+            delete users[index].hash;
+            delete users[index].salt;
+        }
+        
         res.json(users);
     });
 };
@@ -20,13 +26,25 @@ userController.getUser = function(req, res) {
             return res.status(404).send('Not logged in');
         }
         
-        return res.json(req.user);
+        var user = req.user;
+        
+        user = user.toObject();
+        
+        delete user.hash;
+        delete user.salt;
+        
+        return res.json(user);
     }
     
     DBUser.findById(req.params.id, function(err, user) {
         if (err){
             return res.send(err);
         }
+        
+        user = user.toObject();
+        
+        delete user.hash;
+        delete user.salt;
         
         res.json(user);
     });
