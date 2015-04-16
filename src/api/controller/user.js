@@ -14,6 +14,24 @@ userController.getUsers = function(req, res) {
     });
 };
 
+userController.getUser = function(req, res) {
+    if (req.params.id == "me") {
+        if (req.user === undefined) {
+            return res.status(404).send('Not logged in');
+        }
+        
+        return res.json(req.user);
+    }
+    
+    DBUser.findById(req.params.id, function(err, user) {
+        if (err){
+            return res.send(err);
+        }
+        
+        res.json(user);
+    });
+};
+
 userController.registerUser = function(req, res) {
     DBUser.register(new DBUser({
         username: req.body.username,
@@ -24,19 +42,119 @@ userController.registerUser = function(req, res) {
         }
         
         utilities.sendSuccess(res, 'User registered', createdUser);
-        // passport.authenticate('local')(req, res, function () {
-        //     sendSuccess(res, 'User created and signed in', createdUser);
-        // });
-
     });
 };
 
-userController.getMe = function(req, res) {
-    if (req.user === undefined) {
-        return res.status(404).send('Not logged in');
-    }
+
+userController.updateUser = function(req, res) {
+    DBUser.findById(req.params.id, function(err, user) {
+        if (err) {
+            res.send(err);
+        }
+        
+        if (req.body.email !== undefined) {
+            user.email = req.body.email;
+        }
+        
+        user.save(function(err, user){
+            if (err) {
+                res.send(err);
+            }
+            
+            utilities.sendSuccess(res, "User updated", user);
+        });
+    });
+};
+
+userController.deleteUser = function(req, res) {
+    DBUser.findOneAndRemove({_id: req.params.id}, function(err, user){
+       if (err) {
+           return res.send(err);
+       }
+       
+       utilities.sendSuccess(res, "User deleted", user);
+    });
+};
+
+userController.grantAdmin = function(req, res) {
+    DBUser.findById(req.params.id, function(err, user) {
+        if (err) {
+            return res.send(err);
+        }
+        
+        user.isAdmin = true;
+        
+        user.save(function(err, user){
+            if (err) {
+                return res.send(err);
+            }
+            
+           utilities.sendSuccess(res, "User is now admin", user); 
+        });
+    });
+};
+
+userController.revokeAdmin = function(req, res) {
+    DBUser.findById(req.params.id, function(err, user) {
+        if (err) {
+            return res.send(err);
+        }
+        
+        user.isAdmin = false;
+        
+        user.save(function(err, user){
+            if (err) {
+                return res.send(err);
+            }
+            
+           utilities.sendSuccess(res, "User is no longer admin", user); 
+        });
+    });
+};
+
+userController.changePassword = function(req, res) {
+    var userToAlter;
     
-    return res.send(req.user);
+    if (req.params.id == "me") {
+        
+        if (req.user === undefined) {
+            return res.status(404).send('Not logged in');
+        }
+        
+        req.user.setPassword(req.body.password, function(err, user) {
+            if (err) {
+                return res.send(err);
+            }
+            
+            user.save(function(err, userAltered){
+                if (err) {
+                    return res.send(err); 
+                }
+                
+                utilities.sendSuccess(res, "Password changed", userAltered);
+            }); 
+        });
+    } else {
+        DBUser.findById(req.params.id, function(err, user){
+            if (err) {
+                return res.send(err);
+            }
+            
+            user.setPassword(req.body.password, function(err, user) {
+                if (err) {
+                    return res.send(err);
+                }
+                
+                user.save(function(err, userAltered){
+                    if (err) {
+                        return res.send(err); 
+                    }
+                    
+                    utilities.sendSuccess(res, "Password changed", userAltered);
+                }); 
+            });
+        });
+    }
 }
 
 module.exports = userController;

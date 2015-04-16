@@ -39,15 +39,27 @@ router.route('/user')
     .get(userController.getUsers)
     .post(userController.registerUser);
     
-router.route('/user/me')
-    .get(userController.getMe);
+router.route('/user/:id')
+    .get(userController.getUser)
+    .put(userController.updateUser)
+    .patch(userController.updateUser)
+    .delete(userController.deleteUser);
+
+router.route('/user/:id/admin/grant')
+    .get(userController.grantAdmin);
     
-router.route('/user/login')
+router.route('/user/:id/admin/revoke')
+    .get(userController.revokeAdmin);
+    
+router.route('/user/:id/change-password')
+    .post(userController.changePassword);
+    
+router.route('/auth/login')
     .post(passport.authenticate('local'), function(req, res) {
         return utilities.sendSuccess(res, 'User signed in successfull', req.user);
     });
     
-router.route('/user/logout')
+router.route('/auth/logout')
     .get(function(req, res) {
         req.logout();
         return utilities.sendSuccess(res, "User signed out successfull");
