@@ -7,6 +7,7 @@ var categoryController = require('./controller/category.js');
 var customerController = require('./controller/customer.js');
 var stateController = require('./controller/state.js');
 var userController = require('./controller/user.js');
+var itemController = require('./controller/item.js');
 
 // Setup router
 var router = express.Router();
@@ -53,7 +54,8 @@ router.route('/user/:id/admin/revoke')
     
 router.route('/user/:id/change-password')
     .post(userController.changePassword);
-    
+
+// Auth
 router.route('/auth/login')
     .post(passport.authenticate('local'), function(req, res) {
         return utilities.sendSuccess(res, 'User signed in successfull', req.user);
@@ -64,5 +66,15 @@ router.route('/auth/logout')
         req.logout();
         return utilities.sendSuccess(res, "User signed out successfull");
     });
+
+// Item
+router.route('/item')
+    .get(itemController.getItems)
+    .post(itemController.addItem);
+
+router.route('/item/:id')
+    .get(itemController.getItem)
+    .put(itemController.updateItem)
+    .patch(itemController.updateItem)
     
 module.exports = router;
