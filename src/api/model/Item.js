@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+require('mongoose-double')(mongoose);
 
 var itemSchema = new Schema({
     name: {type: String, required: true},

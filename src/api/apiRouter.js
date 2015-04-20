@@ -76,5 +76,6 @@ router.route('/item/:id')
     .get(itemController.getItem)
     .put(itemController.updateItem)
     .patch(itemController.updateItem)
+    .delete(itemController.deleteItem);
     
 module.exports = router;

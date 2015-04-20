@@ -54,6 +54,10 @@ itemController.updateItem = function (req, res) {
             return res.send(err);
         }
         
+        if (item === null) {
+            return utilities.sendError(res, "Item not found");
+        }
+        
         if (req.body.name !== undefined) {
             item.name = req.body.name;
         }

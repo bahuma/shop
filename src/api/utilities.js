@@ -13,6 +13,13 @@ utilities.sendSuccess = function(res, message, object){
     });
 };
 
+utilities.sendError = function(res, message){
+    res.json({
+        status: "error",
+        message: message
+    });
+};
+
 utilities.isAdmin = function(req, res, next) {
     if (req.user !== undefined) {
         if (req.user.isAdmin) {
