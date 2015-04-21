@@ -1,1 +1,1 @@
-angular.module("BahumaShopBackend", ["ngMaterial"])
+angular.module("BahumaShopBackend", ["ngMaterial", "ngRoute"])

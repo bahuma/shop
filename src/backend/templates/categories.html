@@ -1,0 +1,14 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <span>Categories</span>
+    <!-- fill up the space between left and right area -->
+    <span flex></span>
+    <md-button>
+      Right Bar Button
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-content class="md-padding">
+  <div ng-repeat="category in categories">{{category.name}}</div>
+</md-content>
