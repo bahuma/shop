@@ -1,0 +1,2 @@
+yolo(a,b) ->
+    swag();
