@@ -1,2 +1,1 @@
-yolo(a,b) ->
-    swag();
+angular.module("BahumaShopBackend", ["ngMaterial"])
