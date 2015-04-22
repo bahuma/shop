@@ -1,10 +1,14 @@
-angular.module("BahumaShopBackend").run(["$rootScope", "$location", ($rootScope,  $location) ->
-    $rootScope.$on("$routeChangeStart", (event, next, current) ->
+angular.module("BahumaShopBackend").run(["$rootScope", "$location", "BahumaShopApi", ($rootScope,  $location, BahumaShopApi) ->
+    BahumaShopApi.user.getMe().success((data) ->
+        $rootScope.rsUser = data
+    ).finally(() ->
+        $rootScope.$on("$routeChangeStart", (event, next, current) ->
         
-        if !$rootScope.user
-            if next.templateUrl == "templates/login.html"
-                # Already going to login
-            else
-                $location.path("/login")
+            if !$rootScope.rsUser
+                if next.templateUrl == "templates/login.html"
+                    # Already going to login
+                else
+                    $location.path("/login")
+        )
     )
 ])

@@ -3,7 +3,8 @@ angular.module("BahumaShopBackend").factory("BahumaShopApi", ["$http", ($http) -
 
   api = {
     category: {},
-    auth: {}
+    auth: {},
+    user: {}
   }
 
   api.category.getAll = () ->
@@ -14,6 +15,12 @@ angular.module("BahumaShopBackend").factory("BahumaShopApi", ["$http", ($http) -
       username: username,
       password: password
     })
+    
+  api.auth.logout = () ->
+    $http.get(basePath + "/auth/logout")
+  
+  api.user.getMe = () ->
+    $http.get(basePath + "/user/me")
   
   api
 ])

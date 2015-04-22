@@ -3,15 +3,16 @@
     <h2><span>Login</span></h2>
   </div>
 </md-toolbar>
+
 <md-content class="md-padding">
     <form ng-submit="login()">
-        <md-input-container>
-            <label>Username</label>
-            <input required ng-model="user.name">
+        <md-input-container md-no-float>
+            <md-icon md-svg-src="person"></md-icon>
+            <input required ng-model="user.name" placeholder="Username">
         </md-input-container>
-        <md-input-container>
-            <label>Password</label>
-            <input required ng-model="user.password" type="password">
+        <md-input-container md-no-float>
+            <md-icon md-svg-src="lock"></md-icon>
+            <input required ng-model="user.password" type="password" placeholder="Password">
         </md-input-container>
         <md-button class="md-raised md-primary">Login</md-button>
     </form>

@@ -1,0 +1,5 @@
+md-sidenav md-content a.md-button {
+    line-height: 40px;
+    padding: 0 6px;
+    text-align: left;
+}
