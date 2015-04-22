@@ -58,7 +58,10 @@ router.route('/user/:id/change-password')
 // Auth
 router.route('/auth/login')
     .post(passport.authenticate('local'), function(req, res) {
-        return utilities.sendSuccess(res, 'User signed in successfull', req.user);
+        var user = req.user.toObject();
+        delete user.hash;
+        delete user.salt;
+        return utilities.sendSuccess(res, 'User signed in successfull', user);
     });
     
 router.route('/auth/logout')
