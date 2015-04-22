@@ -1,4 +1,7 @@
 angular.module("BahumaShopBackend").controller("LoginCtrl", ["$rootScope", "$scope", "$location", "$mdToast", "BahumaShopApi", ($rootScope, $scope, $location, $mdToast, BahumaShopApi) ->
+    if $rootScope.user
+        $location.path("/dashboard")
+    
     $scope.user = {
         name: "",
         password: ""
