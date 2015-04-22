@@ -16,10 +16,7 @@ angular.module("BahumaShopBackend").controller("LoginCtrl", ["$rootScope", "$sco
             $mdToast.show($mdToast.simple().content("Logged in as " + data.object.username).position("top right"))
         ).error((data, status)->
             $scope.loading = false
-            if status == 403
-                $mdToast.show($mdToast.simple().content("Password is not correct").position("top right"))
-                        
-            if status == 401
-                $mdToast.show($mdToast.simple().content("User not found").position("top right"))
+            
+            $mdToast.show($mdToast.simple().content("User / Password not correct").position("top right"))
         )
 ])
