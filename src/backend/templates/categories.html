@@ -8,15 +8,20 @@
 </md-toolbar>
 
 <md-content class="md-padding" flex>
+  <md-input-container md-no-float>
+    <md-input type="search" placeholder="Search" ng-model="search"></md-input>
+  </md-input-container>
   <md-list>
-    <md-list-item class="md-2-line" ng-repeat="category in categories">
-      <h4>{{category.name}}</h3>
-      <p>{{category.description}}</p>
+    <md-list-item class="md-2-line" ng-repeat="category in categories | filter:{name:search} | orderBy:'name'">
+      <div class="md-list-item-text">
+        <h4>{{category.name}}</h4>
+        <p>{{category.description}}</p>
+      </div>
     </md-list-item>
   </md-list>
-  
+
   <md-button class="md-fab md-fab-bottom-right" aria-label="Add Category" href="#/categories/add">
     <md-icon md-svg-src="add"></md-icon>
   </md-button>
-  
+
 </md-content>

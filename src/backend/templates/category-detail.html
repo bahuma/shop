@@ -1,6 +1,6 @@
 <md-toolbar>
   <div class="md-toolbar-tools">
-    <md-button class="md-icon-button" aria-label="Menu" ng-controller="SideNavCtrl" ng-click="toggle()" ng-show="buttonVisible()">
+    <md-button href="#/categories" class="md-icon-button" aria-label="Menu" ng-controller="SideNavCtrl">
       <md-icon md-svg-icon="arrow-back"></md-icon>
     </md-button>
     <h2><span>{{action}} Category</span></h2>
@@ -8,8 +8,15 @@
 </md-toolbar>
 
 <md-content class="md-padding" flex>
-  <md-input-group>
-      <md-label>Name</md-label>
-  </md-input-group>
-  
+  <form ng-submit="save()">
+    <md-input-container flex>
+      <label>Name</label>
+      <input ng-model="category.name">
+    </md-input-container>
+    <md-input-container flex>
+      <label>Description</label>
+      <textarea ng-model="category.description" columns="1" md-maxlength="500"></textarea>
+    </md-input-container>
+    <md-button class="md-raised md-primary">Save</md-button>
+  </form>
 </md-content>

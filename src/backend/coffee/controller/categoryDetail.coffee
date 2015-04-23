@@ -1,12 +1,12 @@
-angular.module("BahumaShopBackend").controller("CategoryDetailCtrl", ["$scope", "$location", "$mdToast", "BahumaShopApi", ($scope, $location, BahumaShopApi) ->
+angular.module("BahumaShopBackend").controller("CategoryDetailCtrl", ["$scope", "$location", "$mdToast", "BahumaShopApi", ($scope, $location, $mdToast, BahumaShopApi) ->
     $scope.action = "Add"
     $scope.category = {
         name: "",
         description: "",
     }
-    
+
     $scope.save = () ->
-        BahumaShopApi.categories.add($scope.category.name, $scope.category.description).success((data) ->
+        BahumaShopApi.category.add($scope.category).success((data) ->
             $mdToast.show($mdToast.simple().content("Category Saved").position("top right"))
             $location.path("/categories")
         ).error((data) ->

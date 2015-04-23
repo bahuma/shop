@@ -3,3 +3,16 @@ md-sidenav md-content a.md-button {
     padding: 0 6px;
     text-align: left;
 }
+
+.md-button.md-fab.md-fab-bottom-right {
+  position: fixed;
+}
+
+.md-button.md-fab.md-fab-bottom-right md-icon {
+  width: 41px;
+  height: 41px;
+}
+
+md-list md-list-item p {
+  font-size: 0.8rem;
+}
