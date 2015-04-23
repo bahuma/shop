@@ -7,13 +7,16 @@
   </div>
 </md-toolbar>
 
-<md-content class="md-padding">
+<md-content class="md-padding" flex>
   <md-list>
     <md-list-item class="md-2-line" ng-repeat="category in categories">
       <h4>{{category.name}}</h3>
       <p>{{category.description}}</p>
-      <md-icon md-svg-icon="menu" class="md-secondary"></md-icon>
     </md-list-item>
   </md-list>
+  
+  <md-button class="md-fab md-fab-bottom-right" aria-label="Add Category" href="#/categories/add">
+    <md-icon md-svg-src="add"></md-icon>
+  </md-button>
   
 </md-content>

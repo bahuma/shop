@@ -6,6 +6,11 @@ angular.module("BahumaShopBackend").config(["$routeProvider", ($routeProvider) -
     controller: "CategoriesCtrl"
   })
   
+  .when("/categories/add", {
+    templateUrl: "templates/category-detail.html",
+    controller: "CategoryDetailCtrl"
+  })
+  
   .when("/login", {
     templateUrl: "templates/login.html",
     controller: "LoginCtrl"
