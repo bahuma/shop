@@ -1,6 +1,8 @@
 angular.module("BahumaShopBackend").run(["$rootScope", "$location", "BahumaShopApi", ($rootScope,  $location, BahumaShopApi) ->
     BahumaShopApi.user.getMe().success((data) ->
         $rootScope.rsUser = data
+    ).error(() ->
+        $location.path("/login")
     ).finally(() ->
         $rootScope.$on("$routeChangeStart", (event, next, current) ->
         
@@ -10,5 +12,6 @@ angular.module("BahumaShopBackend").run(["$rootScope", "$location", "BahumaShopA
                 else
                     $location.path("/login")
         )
+        
     )
 ])
