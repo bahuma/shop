@@ -1,12 +1,12 @@
 {
-  "name": "bahu_shop",
+  "name": "bahuma_shop",
   "version": "0.0.0",
   "authors": [
-    "Maximilian Bachhuber <bahuma20@bahuma-online.de>"
+    "Maximilian Bachhuber <bahuma20@bahuma.io>"
   ],
   "description": "A webshop based on modern technologies",
   "license": "MIT",
-  "homepage": "https://bahuma.me/solutions/shop",
+  "homepage": "https://bahuma.io/solutions/shop",
   "private": true,
   "ignore": [
     "**/.*",
