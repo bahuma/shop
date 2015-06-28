@@ -1,0 +1,32 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Menu" ng-controller="SideNavCtrl" ng-click="toggle()" ng-show="buttonVisible()">
+      <md-icon> menu </md-icon>
+    </md-button>
+    <h2><span>Items</span></h2>
+  </div>
+</md-toolbar>
+
+<md-content class="md-padding" flex>
+  
+  <md-card ng-repeat="item in items | orderBy:'name'">
+    
+    <md-card-content>
+      <h2 classs="md-title">{{item.name}}</h2>
+      <p>{{item.description}}</p>
+      <p>{{item.price}}</p>
+      <p>Categories: <span ng-repeat="category in item.category">{{category.name}}</span></p>
+    </md-card-content>
+    
+    <div class="md-actions" layout="row" layout-align="end center">
+      <md-button>Edit</md-button>
+      <md-button>Delete</md-button>
+    </div>
+    
+  </md-card>
+
+  <md-button class="md-fab md-fab-bottom-right" aria-label="Add Category" href="#/items/add">
+    <md-icon> add </md-icon>
+  </md-button>
+
+</md-content>
