@@ -5,7 +5,7 @@ var DBItem = require('../model/Item.js');
 var itemController = {};
 
 itemController.getItems = function (req, res) {
-    DBItem.find({}, function(err, items) {
+    DBItem.find({}).populate('category').exec(function(err, items) {
        if (err) {
            return res.send(err);
        }
