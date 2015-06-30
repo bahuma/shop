@@ -28,10 +28,16 @@
     
   </md-card>
   
-  <p ng-show="noCategories()">There are currently no categories. You can <a href="#/categories/add">add one here</a>.</p>
+  <div ng-hide="loading">
+    <p ng-show="noCategories()">There are currently no categories. You can <a href="#/categories/add">add one here</a>.</p>
+  </div>
 
   <md-button class="md-fab md-fab-bottom-right" aria-label="Add Category" href="#/categories/add">
     <md-icon> add </md-icon>
   </md-button>
+  
+  <div layout="row" layout-align="center center" class="md-padding">
+      <md-progress-circular md-mode="indeterminate" ng-show="loading"></md-progress-circular>
+  </div>
 
 </md-content>

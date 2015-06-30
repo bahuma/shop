@@ -1,9 +1,11 @@
 angular.module("BahumaShopBackend").controller("CategoriesCtrl", ["$scope", "$mdToast", "$mdDialog", "BahumaShopApi", function($scope, $mdToast, $mdDialog, BahumaShopApi) {
   $scope.categories = [];
   $scope.search;
+  $scope.loading = true;
   
   BahumaShopApi.category.getAll().success(function(data) {
-    return $scope.categories = data;
+    $scope.categories = data;
+    $scope.loading = false;
   });
   
   $scope.delete = function(categoryID, ev) {
