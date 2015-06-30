@@ -8,9 +8,11 @@
 </md-toolbar>
 
 <md-content class="md-padding" flex>
-  <md-input-container md-no-float>
-    <md-input type="search" placeholder="Search" ng-model="search"></md-input>
-  </md-input-container>
+  
+  <md-input-container md-no-float class="md-icon-float">
+      <md-icon> search </md-icon>
+      <input ng-model="search" type="text" placeholder="Search">
+    </md-input-container>
   
   <md-card ng-repeat="category in categories | filter:{name:search} | orderBy:'name'">
     
@@ -21,10 +23,12 @@
     
     <div class="md-actions" layout="row" layout-align="end center">
       <md-button href="#/categories/edit/{{category._id}}">Edit</md-button>
-      <md-button>Delete</md-button>
+      <md-button ng-click="delete(category._id, $event)">Delete</md-button>
     </div>
     
   </md-card>
+  
+  <p ng-show="noCategories()">There are currently no categories. You can <a href="#/categories/add">add one here</a>.</p>
 
   <md-button class="md-fab md-fab-bottom-right" aria-label="Add Category" href="#/categories/add">
     <md-icon> add </md-icon>

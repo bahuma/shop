@@ -19,6 +19,9 @@ angular.module("BahumaShopBackend").factory("BahumaShopApi", ["$http", function(
   api.category.edit = function(category) {
     return $http.put(basePath + "/category/" + category._id, category);
   };
+  api.category.delete = function(categoryID) {
+    return $http.delete(basePath + "/category/" + categoryID);
+  };
   api.item.getAll = function() {
     return $http.get(basePath + "/item");
   };
