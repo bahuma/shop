@@ -25,28 +25,28 @@ angular.module("BahumaShopBackend").controller("CategoryDetailCtrl", ["$scope", 
     switch ($scope.action) {
       case 'ADD':
         BahumaShopApi.category.add($scope.category).success(function(data) {
-          successAndRedirect();
+          successAndRedirect(data);
         }).error(function(data) {
-          error();
+          error(data);
         });
         break;
       
       case 'EDIT':
         BahumaShopApi.category.edit($scope.category).success(function(data) {
-          successAndRedirect();
+          successAndRedirect(data);
         }).error(function(data) {
-          error();
+          error(data);
         });
     }
     
   };
   
-  var successAndRedirect = function () {
+  var successAndRedirect = function (data) {
     $mdToast.show($mdToast.simple().content("Category Saved").position("top right"));
     $location.path("/categories");
   }
   
-  var error = function() {
+  var error = function(data) {
     $mdToast.show($mdToast.simple().content("Error: " + data.message).position("top right"));
   }
 }]);
