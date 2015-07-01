@@ -1,0 +1,25 @@
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button href="#/items" class="md-icon-button" aria-label="Menu" ng-controller="SideNavCtrl">
+      <md-icon> arrow_back </md-icon>
+    </md-button>
+    <h2><span>{{action}} Item</span></h2>
+  </div>
+</md-toolbar>
+
+<md-content class="md-padding" flex>
+  <form ng-submit="save()">
+    <md-input-container flex>
+      <label>Name</label>
+      <input ng-model="item.name">
+    </md-input-container>
+    <md-input-container flex>
+      <label>Description</label>
+      <textarea ng-model="item.description" columns="1" md-maxlength="500"></textarea>
+    </md-input-container>
+    <md-button class="md-raised md-primary">Save</md-button>
+  </form>
+  <div layout="row" layout-align="center center" class="md-padding">
+      <md-progress-circular md-mode="indeterminate" ng-show="loading"></md-progress-circular>
+  </div>
+</md-content>
