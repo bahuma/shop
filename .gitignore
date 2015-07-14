@@ -2,3 +2,7 @@ node_modules
 bower_components
 .c9
 npm-debug.log
+file-storage/*
+!file-storage/README.txt
+file-storage-temp/*
+!file-storage-temp/README.txt

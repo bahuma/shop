@@ -1,6 +1,8 @@
 // Load Express Server
 var express = require('express');
 var app = express();
+var multer  = require('multer');
+var fs = require('fs');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
@@ -50,11 +52,66 @@ app.use(express.static('src/frontend'));
 // Backend
 app.use('/admin', express.static('src/backend'));
 
+// API
+app.use('/api', apiRouter);
+
 // Bower components
 app.use('/bower-components', express.static('bower_components'));
 
-// API
-app.use('/api', apiRouter);
+// Assets
+app.use('/assets', express.static('file-storage'));
+
+// File-Upload
+var fileUploadStatus = {
+    status: "",
+    message: "",
+    filePath: ""
+};
+
+var multerConfig = {
+    dest: './file-storage-temp',
+    rename: function(fieldname, filename) {
+        return filename + "_" + Date.now();
+    },
+    onFileUploadStart: function (file) {
+        // console.log(file.originalname + ' is starting ...');
+    },
+    onFileUploadComplete: function (file) {
+        var allowedExtension = ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'txt'];
+        
+        if (allowedExtension.indexOf(file.extension.toLowerCase()) != -1) {
+            // Move the file to the file-storage
+            fs.renameSync(__dirname + '/file-storage-temp/' + file.name, __dirname + '/file-storage/' + file.name);
+            fileUploadStatus.status = "ok";
+            fileUploadStatus.message = "File successfully uploaded";
+            fileUploadStatus.filePath = file.name;
+        } else {
+            // Delete the file from the file-storage-temp
+            fileUploadStatus.status = "error";
+            fileUploadStatus.message = "Extension not allowed";
+            fs.unlink(__dirname + '/file-storage-temp/' + file.name);
+        }
+    }
+};
+app.use('/file-upload', multer(multerConfig));
+
+var apiUtilities = require("./src/api/utilities.js");
+
+app.post('/file-upload', apiUtilities.isAdmin, function(req, res){
+    //console.log(req.files);
+    if (fileUploadStatus.status == "ok") {
+        res.status(200).json({
+            status: fileUploadStatus.status,
+            message: fileUploadStatus.message,
+            fileName: fileUploadStatus.filePath
+        });
+    } else {
+        res.status(400).json({
+            status: fileUploadStatus.status,
+            message: fileUploadStatus.message
+        });
+    }
+});
 
 
 // Start Server
