@@ -37,6 +37,8 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Prerender.io implementation for ability to have site crawled
+app.use(require('prerender-node'));
 
 // Load API Router
 var apiRouter = require('./src/api/apiRouter.js');
