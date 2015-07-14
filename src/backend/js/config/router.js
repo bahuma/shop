@@ -25,6 +25,22 @@ angular.module("BahumaShopBackend").config(["$routeProvider", function($routePro
     }
   })
   
+  .when("/items/add", {
+    templateUrl: "templates/item-detail.html",
+    controller: "ItemDetailCtrl",
+    resolve: {
+      FormType: function() { return "ADD" }
+    }
+  })
+  
+  .when("/items/edit/:item_id", {
+    templateUrl: "templates/item-detail.html",
+    controller: "ItemDetailCtrl",
+    resolve: {
+      FormType: function() { return "EDIT" }
+    }
+  })
+  
   .when("/login", {
     templateUrl: "templates/login.html",
     controller: "LoginCtrl"

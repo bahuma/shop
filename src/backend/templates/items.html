@@ -9,24 +9,38 @@
 
 <md-content class="md-padding" flex>
   
-  <md-card ng-repeat="item in items | orderBy:'name'">
+  <md-input-container md-no-float class="md-icon-float">
+    <md-icon> search </md-icon>
+    <input ng-model="search" type="text" placeholder="Search">
+  </md-input-container>
+  
+  <md-card ng-repeat="item in items | filter:{name:search} | orderBy:'name'">
     
     <md-card-content>
       <h2 classs="md-title">{{item.name}}</h2>
       <p>{{item.description}}</p>
-      <p>{{item.price}}</p>
-      <p>Categories: <span ng-repeat="category in item.category">{{category.name}}</span></p>
+      <p>{{item.price}}€</p>
+      <p>Categories: <md-chips><md-chip ng-repeat="category in item.category">{{category.name}}</md-chip></md-chips></p>
+      
     </md-card-content>
     
     <div class="md-actions" layout="row" layout-align="end center">
-      <md-button>Edit</md-button>
-      <md-button>Delete</md-button>
+      <md-button href="#/items/edit/{{item._id}}">Edit</md-button>
+      <md-button ng-click="delete(item._id, $event)">Delete</md-button>
     </div>
     
   </md-card>
+  
+  <div ng-hide="loading">
+    <p ng-show="noCategories()">There are currently no categories. You can <a href="#/categories/add">add one here</a>.</p>
+  </div>
 
   <md-button class="md-fab md-fab-bottom-right" aria-label="Add Category" href="#/items/add">
     <md-icon> add </md-icon>
   </md-button>
+  
+  <div layout="row" layout-align="center center" class="md-padding">
+    <md-progress-circular md-mode="indeterminate" ng-show="loading"></md-progress-circular>
+  </div>
 
 </md-content>

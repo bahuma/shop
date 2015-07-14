@@ -10,9 +10,9 @@
 <md-content class="md-padding" flex>
   
   <md-input-container md-no-float class="md-icon-float">
-      <md-icon> search </md-icon>
-      <input ng-model="search" type="text" placeholder="Search">
-    </md-input-container>
+    <md-icon> search </md-icon>
+    <input ng-model="search" type="text" placeholder="Search">
+  </md-input-container>
   
   <md-card ng-repeat="category in categories | filter:{name:search} | orderBy:'name'">
     
@@ -37,7 +37,7 @@
   </md-button>
   
   <div layout="row" layout-align="center center" class="md-padding">
-      <md-progress-circular md-mode="indeterminate" ng-show="loading"></md-progress-circular>
+    <md-progress-circular md-mode="indeterminate" ng-show="loading"></md-progress-circular>
   </div>
 
 </md-content>

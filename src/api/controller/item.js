@@ -15,7 +15,7 @@ itemController.getItems = function (req, res) {
 };
 
 itemController.getItem = function (req, res) {
-    DBItem.findById(req.params.id, function(err, item){
+    DBItem.findById(req.params.id).populate('category').exec(function(err, item){
         if (err) {
             return res.send(err);
         }

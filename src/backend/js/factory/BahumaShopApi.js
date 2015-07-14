@@ -22,9 +22,23 @@ angular.module("BahumaShopBackend").factory("BahumaShopApi", ["$http", function(
   api.category.delete = function(categoryID) {
     return $http.delete(basePath + "/category/" + categoryID);
   };
+  
   api.item.getAll = function() {
     return $http.get(basePath + "/item");
   };
+  api.item.get = function(itemID) {
+    return $http.get(basePath + "/item/" + itemID);
+  };
+  api.item.add = function(item) {
+    return $http.post(basePath + "/item", item);
+  };
+  api.item.edit = function(item) {
+    return $http.put(basePath + "/item/" + item._id, item);
+  };
+  api.item.delete = function(itemID) {
+    return $http.delete(basePath + "/item/" + itemID);
+  };
+  
   api.auth.login = function(username, password) {
     return $http.post(basePath + "/auth/login", {
       username: username,
