@@ -9,33 +9,12 @@ angular.module("BahumaShopBackend").controller("ItemDetailCtrl", ["$scope", "$lo
     category: []
   };
   
-  $scope.ac = {
-    selectedItem: null,
-    searchText: null,
-    querySearch: function(query) {
-      if (query) {
-        return $scope.ac.availableCategories.filter(function filterFn(category) {
-          return (category.name.indexOf(query) === 0);
-        });
-      } else {
-        return [];
-      }
-    },
-    availableCategories: [
-      {
-        name: "Bücher",
-        _lowername: "bücher"
-      },
-      {
-        name: "Games",
-        _lowername: "games"
-      },
-      {
-        name: "Sonderangebote",
-        _lowername: "sonderangebote"
-      },
-    ]
-  }
+  $scope.categories = [];
+  
+  BahumaShopApi.category.getAll().success(function(data) {
+    console.log(data);
+    $scope.categories = data;
+  });
   
   // BahumaShopApi.category.getAll().success(function(data) {
   //   $scope.availableCategories = ['Bücher', 'Yolo'];
