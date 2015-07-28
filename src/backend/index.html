@@ -33,12 +33,36 @@
         </md-toolbar>
         
         <md-content layout="column">
-          <md-button href="#/dashboard">Dashboard</md-button>
-          <md-button href="#/categories">Categories</md-button>
-          <md-button href="#/items">Products</md-button>
-          <md-button href="#/logout">Logout</md-button>
+          <md-menu-content>
+            <md-menu-item>
+              <md-button href="#/dashboard">
+                <md-icon md-menu-align-target> dashboard </md-icon>
+                Dashboard
+              </md-button>
+            </md-menu-item>
+            
+            <md-menu-item>
+              <md-button href="#/categories">
+                <md-icon md-menu-align-target> folder </md-icon>
+                Categories
+              </md-button>
+            </md-menu-item>
+            
+            <md-menu-item>
+              <md-button href="#/items">
+                <md-icon md-menu-align-target> layers </md-icon>
+                Products
+              </md-button>
+            </md-menu-item>
+            
+            <md-menu-item>
+              <md-button href="#/logout">
+                <md-icon md-menu-align-target> lock </md-icon>
+                Logout
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
         </md-content>
-      
       </md-sidenav>
       
       <ng-view flex layout="column" class="fade"></ng-view>
