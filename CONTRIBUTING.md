@@ -13,3 +13,5 @@ Use this format in the commit message:
 
 - `Component`: Things like _API_, _BACK_, _FRONT_, _DOC_ or _OTHER_
 - `Description`: Meaningfull description of the work, which was done.
+ 
+Example: `API: Added endpoint for creating users`
