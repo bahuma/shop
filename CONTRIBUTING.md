@@ -3,7 +3,7 @@ Contributing
 
 Keep the following hints in mind, when comitting to this repository.
 
-# Commit Message
+## Commit Message
 
 Use this format in the commit message:
 
