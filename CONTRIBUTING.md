@@ -1,7 +1,9 @@
 Contributing
 ============
 
-Keep the following hints in mind, when comitting to this repository:
+Keep the following hints in mind, when comitting to this repository.
+
+# Commit Message
 
 Use this format in the commit message:
 
