@@ -1,0 +1,84 @@
+FORMAT: 1A
+HOST: http://shop-bahuma20.c9.io
+
+# Bahuma Shop API
+Bahuma Shop API is the interface to an online shop, built with NodeJS, Express, MongoDB and AngularJS wich can be found at [GitHub](https://github.com/bahuma/shop)
+
+# Group Category
+Manage Categories
+
+## Category Collection [/api/category]
+### List all Categories [GET]
++ Response 200 (application/json)
+
+        [
+          {
+            "_id": "559277c1928860c51c60a759",
+            "name": "Bücher",
+            "description": "Entfliehen Sie in eine Welt der Phantasie! Lassen Sie ihrer Kreativität beim lesen freien Lauf.\\\nStöbern Sie in unseren Klassikern und auch neuen Werken.",
+            "__v": 0
+          },
+          {
+            "_id": "55927815928860c51c60a75a",
+            "name": "Games",
+            "description": "Sie wollen einfach mal eine Abend mit Ihren Kumpels zocken aber haben keine Spiele zuhause?\\\nKein Problem: Hier finden Sie sicherlich was Sie suchen!\\\n\\\nVon Action über Horror bis hin zu Adventures haben wir alles im Programm.",
+            "__v": 0
+          },
+          {
+            "_id": "559299ab053978bf48a37020",
+            "name": "Sonderangebote",
+            "description": "Unsere Sonderangebote sind die Spitzen-Schnäppchen, die nur für Sie reserviert sind.",
+            "__v": 0
+          }
+        ]
+
+### Create a Category [POST]
++ Request (application/json)
+
+        {
+            "name": "Category 1",
+            "description": "This is a category"
+        }
+
++ Response 201 (application/json)
+
+        {
+          "status": "success",
+          "message": "Category created",
+          "object": {
+            "__v": 0,
+            "name": "Category 123",
+            "_id": "55ba03f328add54611892905"
+          }
+        }
+
+## Category [/api/category/{id}]
+A single Category object with all its details
+
++ Parameters
+    + id (required, varchar, `55ba03f328add54611892905`) ... Numeric `id` of the Category to perform action with. Has example value.
+
+### Retrieve a Category [GET]
++ Response 200 (application/json)
+
+    + Body
+
+            {
+              "_id": "559277c1928860c51c60a759",
+              "name": "Bücher",
+              "description": "Entfliehen Sie in eine Welt der Phantasie! Lassen Sie ihrer Kreativität beim lesen freien Lauf.\\\nStöbern Sie in unseren Klassikern und auch neuen Werken.",
+              "__v": 0
+            }
+
+### Remove a Note [DELETE]
++ Response 200 (application/json)
+        
+        {
+          "status": "success",
+          "message": "Category delted",
+          "object": {
+            "_id": "55ba037b28add54611892903",
+            "name": "Category 1",
+            "__v": 0
+          }
+        }
