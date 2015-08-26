@@ -11,20 +11,26 @@ angular.module("BahumaShopBackend").controller("ItemDetailCtrl", ["$scope", "$lo
   
   $scope.categories = [];
   
+  $scope.categoriesAc = {
+    searchText: null,
+    querySearch: function(query) {
+      
+      var results = [];
+      
+      angular.forEach($scope.categories, function(value, key){
+        if (angular.lowercase(value.name).indexOf(angular.lowercase(query)) > -1) {
+          results.push(value);
+        }
+      })
+        
+      return results;
+    },
+    selectedItem: null
+  }
+  
   BahumaShopApi.category.getAll().success(function(data) {
-    console.log(data);
     $scope.categories = data;
   });
-  
-  // BahumaShopApi.category.getAll().success(function(data) {
-  //   $scope.availableCategories = ['Bücher', 'Yolo'];
-    
-  //   $scope.availableCategories.map(function(category) {
-  //     category._lowername = angular.lowercase(category.name);
-      
-  //     return category;
-  //   })
-  // });
   
   switch ($scope.action) {
     case 'ADD':

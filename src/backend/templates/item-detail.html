@@ -21,11 +21,30 @@
       <label>Price (€)</label>
       <input type="number" step="0.01" ng-model="item.price">
     </md-input-container>
-    <md-input-container flex>
-      <md-select ng-model="item.category" placeholder="Category">
-        <md-option ng-repeat="category in categories" value="{{category._id}}">{{category.name}}</md-option>
-      </md-select>
-    </md-input-container>
+    <!--<md-input-container flex>-->
+    <!--  <md-select ng-model="item.category" placeholder="Category">-->
+    <!--    <md-option ng-repeat="category in categories" value="{{category._id}}">{{category.name}}</md-option>-->
+    <!--  </md-select>-->
+    <!--</md-input-container>-->
+    <!--<md-input-container flex>{{categoriesAc.selectedItem}}-->
+      <md-chips ng-model="item.category" md-autocomplete-snap md-require-match>
+        <md-autocomplete
+            md-selected-item="categoriesAc.selectedItem"
+            md-search-text="categoriesAc.searchText"
+            md-items="item in categoriesAc.querySearch(categoriesAc.searchText)"
+            md-item-text="item.name"
+            md-selected-item-change="null"
+            md-search-text-change="null"
+            placeholder="Search for a category">
+          <span md-highlight-text="categoriesAc.searchText">{{item.name}} :: {{item._id}}</span>
+        </md-autocomplete>
+        <md-chip-template>
+          <span>
+            <strong>{{$chip.name}}</strong>
+          </span>
+        </md-chip-template>
+      </md-chips>
+    <!--</md-input-container>-->
     <md-button class="md-raised md-primary">Save</md-button>
   </form>
   <div layout="row" layout-align="center center" class="md-padding">
