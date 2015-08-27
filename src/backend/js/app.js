@@ -1,1 +1,1 @@
-angular.module("BahumaShopBackend", ["ngMaterial", "ngRoute"]);
+angular.module("BahumaShopBackend", ["ngMaterial", "md.data.table", "ngRoute"]);

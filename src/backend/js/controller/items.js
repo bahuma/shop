@@ -1,12 +1,18 @@
-angular.module("BahumaShopBackend").controller("ItemsCtrl", ["$scope", "$mdToast", "$mdDialog", "BahumaShopApi", function($scope, $mdToast, $mdDialog, BahumaShopApi) {
+angular.module("BahumaShopBackend").controller("ItemsCtrl", ["$scope", "$location", "$mdToast", "$mdDialog", "BahumaShopApi", function($scope, $location, $mdToast, $mdDialog, BahumaShopApi) {
   $scope.items = [];
-  $scope.search;
+  $scope.searchText;
   $scope.loading = true;
+  
+  $scope.query = {
+    filter: '',
+    order: 'name',
+    limit: 5,
+    page: 1
+  };
   
   BahumaShopApi.item.getAll().success(function(data) {
     $scope.items = data;
     $scope.loading = false;
-    console.log(data);
   });
   
   $scope.delete = function(itemID, ev) {
@@ -35,6 +41,10 @@ angular.module("BahumaShopBackend").controller("ItemsCtrl", ["$scope", "$mdToast
       });
     });
   };
+  
+  $scope.edit = function(itemID) {
+    $location.path('/items/edit/' + itemID);
+  }
   
   $scope.noItems = function() {
     if ($scope.items.length == 0)

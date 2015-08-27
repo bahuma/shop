@@ -11,24 +11,37 @@
   
   <md-input-container md-no-float class="md-icon-float">
     <md-icon> search </md-icon>
-    <input ng-model="search" type="text" placeholder="Search">
+    <input ng-model="searchText" type="text" placeholder="Search">
   </md-input-container>
   
-  <md-card ng-repeat="item in items | filter:{name:search} | orderBy:'name'">
-    
-    <md-card-content>
-      <h2 classs="md-title">{{item.name}}</h2>
-      <p>{{item.description}}</p>
-      <p>{{item.price}}€</p>
-      <p>Categories: <md-chips><md-chip ng-repeat="category in item.category">{{category.name}}</md-chip></md-chips></p>
-      
-    </md-card-content>
-    
-    <div class="md-actions" layout="row" layout-align="end center">
-      <md-button href="#/items/edit/{{item._id}}">Edit</md-button>
-      <md-button ng-click="delete(item._id, $event)">Delete</md-button>
-    </div>
-    
+  <md-card>
+    <md-data-table-container>
+      <table md-data-table>
+        <thead md-order="query.order">
+          <tr>
+            <th name="Name"></th>
+            <th name="Categories"></th>
+            <th numeric name="Price" unit="€"></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr md-auto-select ng-repeat="item in items">
+            <td>{{item.name}}</td>
+            <td><span ng-repeat="cat in item.category">{{cat.name}}<span ng-if="!$last">, </span></span></td>
+            <td show-unit>{{item.price}}</td>
+            <td>
+              <md-button class="md-icon-button" ng-click="edit(item._id)" aria-label="Edit">
+                <md-icon> edit </md-icon>
+              </md-button>
+              <md-button class="md-icon-button" ng-click="delete(item._id, $event)" aria-label="Delete">
+                <md-icon> delete </md-icon>
+              </md-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-data-table-container>
   </md-card>
   
   <div ng-hide="loading">
