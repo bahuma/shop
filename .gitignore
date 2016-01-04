@@ -1,6 +1,7 @@
 node_modules
 bower_components
 .c9
+.idea
 npm-debug.log
 file-storage/*
 !file-storage/README.txt
