@@ -21,6 +21,7 @@
     "angular-route": "~1.4.1",
     "angular-resource": "~1.4.1",
     "angular-animate": "~1.4.1",
-    "angular-material-data-table": "~0.8.9"
+    "angular-material-data-table": "~0.8.9",
+    "ng-file-upload-shim": "~11.0.1"
   }
 }
