@@ -13,7 +13,7 @@ var DBUser = require('./src/api/model/User.js');
 
 // MongoDB Connection
 var mongoose = require('mongoose');
-var mongoOptions = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
+var mongoOptions = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
                 replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
 
 mongoose.connect(process.env.DATABASE, mongoOptions);
@@ -80,7 +80,7 @@ var multerConfig = {
     },
     onFileUploadComplete: function (file) {
         var allowedExtension = ['jpeg', 'jpg', 'png', 'gif', 'pdf', 'txt'];
-        
+
         if (allowedExtension.indexOf(file.extension.toLowerCase()) != -1) {
             // Move the file to the file-storage
             fs.renameSync(__dirname + '/file-storage-temp/' + file.name, __dirname + '/file-storage/' + file.name);
@@ -118,20 +118,20 @@ app.post('/file-upload', apiUtilities.isAdmin, function(req, res){
 // Image Resize
 app.get('/assets/resize/:width/:height/:filename', function(req, res) {
   var resize_folder = __dirname + '/file-storage/resized_images/' + req.params.width + '_' + req.params.height + '/';
-  
+
   if (!fs.existsSync(__dirname + '/file-storage/resized_images/')) {
     fs.mkdirSync(__dirname + '/file-storage/resized_images/');
   }
   // Check if image has already been resized
   if (fs.existsSync(resize_folder + req.params.filename)) {
     // Send the existing file to the user
-    res.sendFile(resize_folder + req.params.filename);  
+    res.sendFile(resize_folder + req.params.filename);
   }
-  
+
   // Create directory for the resized image if not exists
   if (!fs.existsSync(resize_folder))
     fs.mkdirSync(resize_folder);
-  
+
   // Resize the image and save it.
   imageMagick(__dirname + '/file-storage/' + req.params.filename)
       .resize(req.params.width, req.params.height, "!")
@@ -140,7 +140,7 @@ app.get('/assets/resize/:width/:height/:filename', function(req, res) {
             console.log(err);
             return res.status(500).send('Internal server error');
         }
-        
+
         // send the generated file to the user
         res.sendFile(resize_folder + req.params.filename);
       });
@@ -149,20 +149,20 @@ app.get('/assets/resize/:width/:height/:filename', function(req, res) {
 // Image Scale
 app.get('/assets/scale/:width/:height/:filename', function(req, res) {
     var resize_folder = __dirname + '/file-storage/scaled_images/' + req.params.width + '_' + req.params.height + '/';
-  
+
   if (!fs.existsSync(__dirname + '/file-storage/scaled_images/')) {
     fs.mkdirSync(__dirname + '/file-storage/scaled_images/');
   }
   // Check if image has already been resized
   if (fs.existsSync(resize_folder + req.params.filename)) {
     // Send the existing file to the user
-    res.sendFile(resize_folder + req.params.filename);  
+    res.sendFile(resize_folder + req.params.filename);
   }
-  
+
   // Create directory for the resized image if not exists
   if (!fs.existsSync(resize_folder))
     fs.mkdirSync(resize_folder);
-  
+
   // Resize the image and save it.
   imageMagick(__dirname + '/file-storage/' + req.params.filename)
       .scale(req.params.width, req.params.height)
@@ -171,10 +171,44 @@ app.get('/assets/scale/:width/:height/:filename', function(req, res) {
             console.log(err);
             return res.status(500).send('Internal server error');
         }
-        
+
         // send the generated file to the user
         res.sendFile(resize_folder + req.params.filename);
       });
+});
+
+
+// Image Scale and crop
+app.get('/assets/scale-crop/:width/:height/:filename', function(req, res) {
+  var resize_folder = __dirname + '/file-storage/scaled_cropped_images/' + req.params.width + '_' + req.params.height + '/';
+
+  if (!fs.existsSync(__dirname + '/file-storage/scaled_cropped_images/')) {
+    fs.mkdirSync(__dirname + '/file-storage/scaled_cropped_images/');
+  }
+  // Check if image has already been resized
+  if (fs.existsSync(resize_folder + req.params.filename)) {
+    // Send the existing file to the user
+    res.sendFile(resize_folder + req.params.filename);
+  }
+
+  // Create directory for the resized image if not exists
+  if (!fs.existsSync(resize_folder))
+    fs.mkdirSync(resize_folder);
+
+  // Resize the image and save it.
+  imageMagick(__dirname + '/file-storage/' + req.params.filename)
+    .resize(req.params.width, req.params.height, '^')
+    .gravity('Center')
+    .crop(req.params.width, req.params.height)
+    .write(resize_folder + req.params.filename, function (err) {
+      if (err) {
+        console.log(err);
+        return res.status(500).send('Internal server error');
+      }
+
+      // send the generated file to the user
+      res.sendFile(resize_folder + req.params.filename);
+    });
 });
 
 // Start Server
