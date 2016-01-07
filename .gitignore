@@ -5,5 +5,6 @@ bower_components
 npm-debug.log
 file-storage/*
 !file-storage/README.txt
+!file-storage/_placeholder.png
 file-storage-temp/*
 !file-storage-temp/README.txt
